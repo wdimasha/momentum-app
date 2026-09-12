@@ -3,17 +3,26 @@ import {Projects} from '../data/projects.js'
 function ProjectDetails(){
   const {id} = useParams();
   const project = Projects.find((project)=> project.id === Number(id));
+  const isProject = project;
   return(
     <>
-     <h3>{project.projectName}</h3>
-    <p>{project.description}</p>
-    <h5>Last worked</h5>
-    <p>{project.lastWorked}</p>
-    <h5>Status:</h5>
-    
-    <p>{project.status}</p>
-    <h5>Next action:</h5>
-    <p>{project.nextAction}</p>
+     <header>
+      <Link to = "/">← Projects
+</Link>
+     {isProject ? (
+       <>
+      <h1>{project.projectName}</h1>
+      <h3>{project.status}</h3>
+      <p>{project.description}</p>
+      <p>Last worked:{project.lastWorked}</p>
+      <p>WHERE YOU LEFT OFF: {project.whereILeftOff}</p>
+      <p>LAST COMPLETED: {project.lastCompleted}</p>
+       </>
+     ):(
+      <h1>Project not found</h1>
+     )}     
+     </header>
+     
     </>
   )
 }
